@@ -29,13 +29,13 @@ public class LoadController {
     @GetMapping("/{loadId}")
     public ResponseEntity<Load> getLoad(@PathVariable Long loadId) {
         Load load = loadService.getLoadById(loadId);
-        return load != null ? ResponseEntity.ok(load) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(load);
     }
 
     @PutMapping("/{loadId}")
     public ResponseEntity<Load> updateLoad(@PathVariable Long loadId, @RequestBody Load load) {
         Load updatedLoad = loadService.updateLoad(loadId, load);
-        return updatedLoad != null ? ResponseEntity.ok(updatedLoad) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(updatedLoad);
     }
 
     @DeleteMapping("/{loadId}")

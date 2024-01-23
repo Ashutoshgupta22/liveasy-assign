@@ -1,6 +1,7 @@
 package com.example.liveasylogisticsassign.service;
 
 import com.example.liveasylogisticsassign.entity.Load;
+import com.example.liveasylogisticsassign.exception.CustomException;
 import com.example.liveasylogisticsassign.repo.LoadRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,19 +23,29 @@ public class LoadService {
     }
 
     public Load getLoadById(Long id) {
-        return loadRepository.findById(id).orElse(null);
+        return loadRepository.findById(id).orElseThrow(() -> new CustomException("Load does not exist"));
     }
 
     public Load updateLoad(Long id, Load load) {
         Load existingLoad = getLoadById(id);
         if (existingLoad != null) {
-            existingLoad = load;
+            existingLoad.setLoadingPoint(load.getLoadingPoint());
+            existingLoad.setUnloadingPoint(load.getUnloadingPoint());
+            existingLoad.setProductType(load.getProductType());
+            existingLoad.setTruckType(load.getTruckType());
+            existingLoad.setNoOfTrucks(load.getNoOfTrucks());
+            existingLoad.setWeight(load.getWeight());
+            existingLoad.setComment(load.getComment());
+            existingLoad.setShipperId(load.getShipperId());
+            existingLoad.setDate(load.getDate());
             return loadRepository.save(existingLoad);
         }
         return null;
     }
 
     public void deleteLoad(Long id) {
-        loadRepository.deleteById(id);
+        Load existingLoad = getLoadById(id);
+        if (existingLoad != null)
+            loadRepository.deleteById(id);
     }
 }
