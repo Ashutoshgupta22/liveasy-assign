@@ -36,7 +36,6 @@ public class LoadService {
             existingLoad.setNoOfTrucks(load.getNoOfTrucks());
             existingLoad.setWeight(load.getWeight());
             existingLoad.setComment(load.getComment());
-            existingLoad.setShipperId(load.getShipperId());
             existingLoad.setDate(load.getDate());
             return loadRepository.save(existingLoad);
         }

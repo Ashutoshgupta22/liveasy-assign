@@ -39,8 +39,8 @@ public class LoadController {
     }
 
     @DeleteMapping("/{loadId}")
-    public ResponseEntity<Void> deleteLoad(@PathVariable Long loadId) {
+    public ResponseEntity<String> deleteLoad(@PathVariable Long loadId) {
         loadService.deleteLoad(loadId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Load deleted successfully");
     }
 }

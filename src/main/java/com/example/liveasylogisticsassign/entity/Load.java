@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -22,5 +23,7 @@ public class Load {
     private Double weight;
     private String comment;
     private String shipperId;
-    private Date date;
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate date;
 }
